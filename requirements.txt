@@ -1,2 +1,2 @@
-numpy
-httpx
+numpy>=1.26,<3
+Pillow>=10,<14

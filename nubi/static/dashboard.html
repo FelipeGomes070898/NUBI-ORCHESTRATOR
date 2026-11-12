@@ -1,0 +1,87 @@
+<!doctype html><html lang="pt-br"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NUBI Video AI Studio</title><style>
+:root{--bg:#070b12;--pn:#0d1420;--ln:#1b2638;--tx:#e6edf6;--mu:#7f8fa6;--ac:#38bdf8;--ok:#34d399;--er:#f87171}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px system-ui,sans-serif;display:flex;min-height:100vh}
+nav{width:190px;background:var(--pn);border-right:1px solid var(--ln);padding:14px 8px;position:sticky;top:0;height:100vh;overflow:auto;flex:none}
+nav b{display:block;padding:4px 10px 14px;font-size:16px;color:var(--ac)}
+nav a{display:block;padding:8px 10px;border-radius:7px;color:var(--mu);cursor:pointer;margin-bottom:2px}
+nav a.on{background:#12304a;color:var(--tx)}nav a.soon{opacity:.45;cursor:default}nav a.soon:after{content:" · em breve";font-size:10px}
+main{flex:1;padding:14px 18px;min-width:0}
+.bar{display:flex;flex-wrap:wrap;gap:6px 14px;background:var(--pn);border:1px solid var(--ln);border-radius:8px;padding:8px 12px;font-size:12px;color:var(--mu);margin-bottom:14px}
+.bar i{font-style:normal;color:var(--tx)}.ok{color:var(--ok)!important}.no{color:var(--er)!important}
+h1{margin:0 0 2px;font-size:20px}.sub{color:var(--mu);font-size:12px;margin-bottom:12px}
+.card{background:var(--pn);border:1px solid var(--ln);border-radius:10px;padding:12px 14px;margin-bottom:6px}
+.card h2{margin:0 0 10px;font-size:15px}.card h2 span{font-weight:400;color:var(--mu)}
+.arrow{text-align:center;color:var(--mu);line-height:1.2}
+label{display:block;font-size:11px;color:var(--mu);margin:0 0 3px}
+input,select,textarea{width:100%;background:#09101a;color:var(--tx);border:1px solid var(--ln);border-radius:6px;padding:7px 9px;font:inherit}
+textarea{min-height:92px;resize:vertical}.row{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-bottom:10px}
+button{background:var(--ac);color:#04121c;border:0;border-radius:7px;padding:9px 16px;font-weight:600;cursor:pointer}button.alt{background:#1b2638;color:var(--tx)}button:disabled{opacity:.5}
+.styles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:10px}
+.st{border:1px solid var(--ln);border-radius:8px;padding:8px;cursor:pointer;font-size:12px;color:var(--mu)}.st b{display:block;color:var(--tx);font-size:13px}.st.on{border-color:var(--ac);background:#0e2234}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}
+.prog{height:7px;background:#0a1018;border-radius:5px;overflow:hidden;margin:8px 0 4px}.prog div{height:100%;width:0;background:linear-gradient(90deg,#0ea5e9,#7dd3fc);transition:width .4s}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{background:#102033;border:1px solid var(--ln);border-radius:20px;padding:3px 10px;font-size:11px}
+video{width:100%;border-radius:8px;background:#000;max-height:340px}img.th{width:100%;border-radius:6px}
+pre{margin:0;background:#04070c;border-radius:6px;padding:8px;height:130px;overflow:auto;font:11px ui-monospace,monospace;color:#8fb4d4}
+.sec{display:none}.sec.on{display:block}.fin{display:grid;grid-template-columns:2fr 1fr;gap:10px}@media(max-width:800px){.fin{grid-template-columns:1fr}nav{width:64px}nav a{font-size:0}nav a:before{content:"•";font-size:16px}nav b{font-size:0}}
+td,th{text-align:left;padding:6px 8px;border-bottom:1px solid var(--ln)}table{width:100%;border-collapse:collapse}
+</style></head><body>
+<nav><b>◆ NUBI</b>
+<a class="on" data-v="dash">Dashboard</a><a data-v="dash">Novo vídeo</a><a data-v="proj">Projetos</a><a data-v="dash">AI Director</a>
+<a class="soon">Script Gen</a><a class="soon">Image Gen</a><a class="soon">Video Gen</a><a class="soon">Animation Engine</a><a class="soon">Voice Gen</a><a class="soon">Audio Engine</a><a class="soon">Video Editor</a>
+<a data-v="dash">Render Engine</a><a data-v="pub">Publicação</a><a class="soon">Configurações</a></nav>
+<main>
+<div class="bar" id="bar">carregando…</div>
+<div class="sec on" id="v-dash">
+<h1>NUBI VIDEO AI STUDIO</h1><div class="sub">FLUXO AUTOMÁTICO DE PRODUÇÃO</div>
+<div class="card"><h2>1. Você fornece uma ideia: <span>tema, roteiro, idioma, duração e estilo</span></h2>
+<div class="row" style="grid-template-columns:2fr 1fr 1fr 1fr 1fr"><div><label>Tema / título</label><input id="titulo" value="How the Universe Began"></div>
+<div><label>Idioma</label><select id="idioma"><option value="en">English</option><option value="pt-br">Português (BR)</option></select></div>
+<div><label>Duração (s)</label><input id="duracao" type="number" value="60" min="6"></div>
+<div><label>Formato</label><select id="formato"><option>16:9</option><option>9:16</option></select></div>
+<div><label>Resolução</label><select id="resolucao"><option>360</option><option selected>720</option><option>1080</option></select></div></div>
+<label>Roteiro (uma cena por linha; vazio = exemplo "How the Universe Began")</label><textarea id="roteiro"></textarea>
+<label style="margin-top:8px">Imagens próprias (opcional, um caminho por linha, na ordem das cenas)</label><textarea id="imagens" style="min-height:40px"></textarea>
+<label style="margin-top:8px">Estilo de animação</label><div class="styles" id="styles">
+<div class="st on" data-s="cartoon"><b>Cartoon 2D</b>contornos, nuvens, mascote</div><div class="st" data-s="parallax"><b>Parallax</b>camadas em velocidades diferentes</div>
+<div class="st" data-s="3d"><b>3D (2.5D)</b>câmera avança em perspectiva</div><div class="st" data-s="zoom"><b>Zoom simples</b>modo original</div></div>
+<button id="go">Gerar vídeo</button> <button class="alt" id="plan">Pré-visualizar direção</button></div>
+<div class="arrow">↓</div>
+<div class="card"><h2>2. Diretor de inteligência artificial: <span>roteiro, narrativa e planejamento visual</span></h2>
+<div class="chips" id="plano"><span class="chip">Diretor por regras ativo (humor, câmera, tags). Clique em "Pré-visualizar direção".</span></div></div>
+<div class="arrow">↓</div>
+<div class="grid4">
+<div class="card"><h2>3. Camadas <span>(parallax/cartoon)</span></h2><div class="sub" id="t-cenas">aguardando</div><div class="prog"><div id="p-cenas"></div></div></div>
+<div class="card"><h2>3. Narração <span>(espeak-ng/flite)</span></h2><div class="sub" id="t-voz">aguardando</div><div class="prog"><div id="p-voz"></div></div></div>
+<div class="card"><h2>3. Animação <span>(Blender/Three.js)</span></h2><div class="sub">integração futura</div><div class="prog"><div></div></div></div>
+<div class="card"><h2>3. Composição <span>(FFmpeg)</span></h2><div class="sub" id="t-composicao">aguardando</div><div class="prog"><div id="p-composicao"></div></div></div></div>
+<div class="arrow">↓</div>
+<div class="card"><h2>3. Vídeo final: <span>MP4 + thumbnail + título + descrição + tags + hashtags</span></h2>
+<div class="fin"><div><video id="vid" controls></video></div><div><label>Status</label><div id="st" class="chip">sem vídeo</div><label style="margin-top:8px">Miniatura</label><img class="th" id="th" alt="">
+<label style="margin-top:8px">Título</label><input id="o-t" readonly><label style="margin-top:6px">Descrição</label><input id="o-d" readonly><label style="margin-top:6px">Tags</label><input id="o-g" readonly><label style="margin-top:6px">Hashtags</label><input id="o-h" readonly>
+<p><a id="dl" style="color:var(--ac)" hidden>Baixar MP4</a> <a id="dl2" style="color:var(--ac)" hidden>Legendas SRT</a></p></div></div></div>
+<div class="card"><h2>Fila de render e monitor de log</h2><pre id="log"></pre></div></div>
+<div class="sec" id="v-proj"><h1>Projetos</h1><div class="card"><table id="tb"></table></div></div>
+<div class="sec" id="v-pub"><h1>Assistente de publicação</h1><div class="sub">Use os campos de metadados do último vídeo (painel "Vídeo final"). Envio automático ao YouTube/TikTok ainda não implementado.</div></div>
+</main><script>
+const $=i=>document.getElementById(i);let est="cartoon",job=null,shown=null;
+const api=(u,b)=>fetch(u,b?{method:"POST",body:JSON.stringify(b)}:{}).then(r=>r.json());
+document.querySelectorAll("nav a[data-v]").forEach(a=>a.onclick=()=>{document.querySelectorAll("nav a").forEach(x=>x.classList.remove("on"));a.classList.add("on");
+document.querySelectorAll(".sec").forEach(s=>s.classList.toggle("on",s.id=="v-"+a.dataset.v));if(a.dataset.v=="proj")projetos()});
+$("styles").onclick=e=>{const s=e.target.closest(".st");if(!s)return;est=s.dataset.s;document.querySelectorAll(".st").forEach(x=>x.classList.toggle("on",x==s))};
+const dados=()=>({titulo:$("titulo").value,roteiro:$("roteiro").value,idioma:$("idioma").value,duracao:$("duracao").value,formato:$("formato").value,resolucao:$("resolucao").value,imagens:$("imagens").value,estilo:est});
+$("plan").onclick=async()=>{const p=await api("/api/plano",dados());if(p.erro)return;$("plano").innerHTML=p.cenas.map(c=>`<span class="chip">Cena ${c.cena}: ${c.humor} · câmera ${c.direcao>0?"→":"←"}</span>`).join("")+p.hashtags.map(h=>`<span class="chip">${h}</span>`).join("")||"Roteiro vazio: será usado o exemplo."};
+$("go").onclick=async()=>{const r=await api("/api/render",dados());if(r.erro){alert(r.erro);return}job=r.id;shown=null;$("go").disabled=true};
+async function projetos(){const l=await api("/api/projetos");$("tb").innerHTML="<tr><th>Título</th><th>ID</th><th></th></tr>"+l.map(p=>`<tr><td>${p.titulo}</td><td>${p.id}</td><td><a style="color:var(--ac)" href="/files/${p.id}/video.mp4" target="_blank">abrir</a></td></tr>`).join("")}
+async function status(){const s=await api("/api/status"),f=(n,v)=>`${n}: <i class="${v?"ok":"no"}">${v?"instalado":"ausente"}</i>`;
+$("bar").innerHTML=`CPU: <i>${s.cpu}</i> RAM: <i>${s.ram}</i> GPU: <i>${s.gpu}</i> Python: <i>${s.python}</i> ${f("FFmpeg",s.ffmpeg)} ${f("espeak-ng",s.espeak)} ${f("Blender",s.blender)} ComfyUI: <i class="no">não conectado</i>`}
+async function tick(){const js=await api("/api/jobs");const j=js.find(x=>x.id==job)||js[0];if(!j)return;
+$("log").textContent=j.log.join("\n");$("log").scrollTop=1e9;
+for(const k of["voz","cenas","composicao"]){$("p-"+k).style.width=(j.etapas[k]*100)+"%";$("t-"+k).textContent=j.etapas[k]>=1?"concluído":j.etapas[k]>0?Math.round(j.etapas[k]*100)+"%":"aguardando"}
+if(j.estado=="pronto"&&shown!=j.id){shown=j.id;$("go").disabled=false;const b="/files/"+j.projeto+"/",p=j.publicacao;$("vid").src=b+"video.mp4";$("th").src=b+"miniatura.jpg";
+$("st").textContent="validado ✓";$("o-t").value=p.titulo;$("o-d").value=p.descricao;$("o-g").value=p.tags.join(", ");$("o-h").value=p.hashtags.join(" ");
+$("dl").href=b+"video.mp4";$("dl2").href=b+"legendas.srt";$("dl").hidden=$("dl2").hidden=false}
+if(j.estado=="erro"){$("go").disabled=false;$("st").textContent="erro"}if(j.estado=="rodando")$("go").disabled=true}
+status();setInterval(tick,1500);setInterval(status,10000);
+</script></body></html>
